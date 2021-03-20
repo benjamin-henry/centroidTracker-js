@@ -1,0 +1,32 @@
+{
+  "name": "centroid-tracker-js",
+  "version": "1.0.0",
+  "description": "Simple object tracking in javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/benjamin-henry/centroidTracker-js.git"
+  },
+  "keywords": [
+    "centroid",
+    "tracker",
+    "javascript",
+    "js",
+    "object",
+    "detection",
+    "tensorflow",
+    "tfjs",
+    "keras",
+    "opencv",
+    "cv2"
+  ],
+  "author": "Benjamin Henry",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/benjamin-henry/centroidTracker-js/issues"
+  },
+  "homepage": "https://github.com/benjamin-henry/centroidTracker-js#readme"
+}

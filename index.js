@@ -56,7 +56,6 @@ class CentroidTracker {
         }
 
         let inputCentroids = [];
-        console.log(rects)
         for(let i = 0; i < rects.length; i++) {
             inputCentroids.push([
                 ~~((rects[i].topLeft[0] + rects[i].bottomRight[0]) / 2),

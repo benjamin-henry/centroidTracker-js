@@ -12,32 +12,35 @@ Example :
 ```js
 const CentroidTracker = require('centroid-tracker-js')
 
-const tracker = new CentroidTracker(maxDisappeared=0);
+const tracker = new CentroidTracker(maxDisappeared=10);
 
 const preds_1 = [
-    {upperLeft: [0,0], bottomRight: [100,100]},
-    {upperLeft: [150,150], bottomRight: [250,250]},
+    {topLeft: [0,0], bottomRight: [100,100]},
+    {topLeft: [150,150], bottomRight: [250,250]},
 ];
 
 const preds_2 = [
-    {upperLeft: [164,164],  bottomRight: [260,260]},
-    {upperLeft: [10,10],    bottomRight: [110,110]},
-    {upperLeft: [464,464],  bottomRight: [560,560]},
+    {topLeft: [164,164],  bottomRight: [200,260]},
+    {topLeft: [10,10],    bottomRight: [110,110]},
+    {topLeft: [464,464],  bottomRight: [560,560]},
 ];
 
 const preds_3 = [
-    {upperLeft: [164,164],  bottomRight: [260,260]},
-    {upperLeft: [464,464],  bottomRight: [560,560]},
+    {topLeft: [300,300],  bottomRight: [480,480]},
+    {topLeft: [464,464],  bottomRight: [560,560]},
 ];
 
-console.log(tracker.update(preds_1));
-console.log(tracker.update(preds_2));
-console.log(tracker.update(preds_3));
+const obj1 = tracker.update(preds_1);
+const obj2 = tracker.update(preds_2);
+const obj3 = tracker.update(preds_3);
 
+console.log(obj1);
+console.log(obj2);
+console.log(obj3);
 /* 
 Logs :
 { '0': [ 50, 50 ], '1': [ 200, 200 ] }
-{ '0': [ 60, 60 ], '1': [ 212, 212 ], '2': [ 512, 512 ] }
-{ '1': [ 212, 212 ], '2': [ 512, 512 ] }
+{ '0': [ 60, 60 ], '1': [ 182, 212 ], '2': [ 512, 512 ] }
+{ '0': [ 60, 60 ], '1': [ 390, 390 ], '2': [ 512, 512 ] }
 */
 ```

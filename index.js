@@ -14,27 +14,27 @@ class CentroidTracker {
         // object is allowed to be marked as "disappeared" until we
         // need to deregister the object from tracking
         this.maxDisappeared = maxDisappeared;
-    }
+    };
 
-    euclideanDistance = (a, b) => {
+    euclideanDistance(a, b) {
         const dx = a[0]-b[0];
         const dy = a[1]-b[1];
         return Math.sqrt(dx*dx + dy*dy);
-    }
+    };
 
-    register = (centroid) => {
+    register(centroid){
         this.objects[this.nextObjectID] = centroid;
         this.disappeared[this.nextObjectID] = 0;
         this.nextObjectID++;
     };
 
     
-    deregister = (ObjectID) => {
+    deregister(ObjectID){
         delete this.objects[ObjectID]
         delete this.disappeared[ObjectID]
     };
 
-    update = (rects) => {
+    update(rects){
         if(rects.length == 0) {
             Object.keys(this.disappeared).forEach(objectID => {
                 this.disappeared[objectID] += 1;

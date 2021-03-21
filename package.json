@@ -28,5 +28,9 @@
   "bugs": {
     "url": "https://github.com/benjamin-henry/centroidTracker-js/issues"
   },
-  "homepage": "https://github.com/benjamin-henry/centroidTracker-js#readme"
+  "homepage": "https://github.com/benjamin-henry/centroidTracker-js#readme",
+  "devDependencies": {
+    "webpack": "^5.27.1",
+    "webpack-cli": "^4.5.0"
+  }
 }

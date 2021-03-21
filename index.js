@@ -142,7 +142,7 @@ class CentroidTracker {
                 })
             }
         }
-        this.updateTrackable(this.objects);
+        // this.updateTrackable(this.objects);
         return Object.assign({},this.objects);
     };
 

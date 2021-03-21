@@ -4,11 +4,20 @@
 
 const argsort = arr => arr.map((v,i) => [v,i]).sort().map(a => a[1]);
 
+class TrackableObject {
+    constructor(objectID, centroid) {
+        this.objectID = objectID;
+        this.centroids = [centroid];
+        this.counted = false;
+    }
+};
+
 class CentroidTracker {
     constructor(maxDisappeared=50) {
         this.nextObjectID = 0;
         this.objects = {};
         this.disappeared = {};
+        this.trackableObjects = {};
 
         // store the number of maximum consecutive updates a given
         // object is allowed to be marked as "disappeared" until we
@@ -29,9 +38,10 @@ class CentroidTracker {
     };
 
     
-    deregister(ObjectID){
-        delete this.objects[ObjectID]
-        delete this.disappeared[ObjectID]
+    deregister(objectID){
+        delete this.objects[objectID]
+        delete this.disappeared[objectID]
+        delete this.trackableObjects[objectID]
     };
 
     update(rects){
@@ -48,8 +58,8 @@ class CentroidTracker {
         let inputCentroids = [];
         for(let i = 0; i < rects.length; i++) {
             inputCentroids.push([
-                ~~((rects[i].upperLeft[0] + rects[i].bottomRight[0]) / 2),
-                ~~((rects[i].upperLeft[1] + rects[i].bottomRight[1]) / 2)
+                ~~((rects[i].topLeft[0] + rects[i].bottomRight[0]) / 2),
+                ~~((rects[i].topLeft[1] + rects[i].bottomRight[1]) / 2)
             ]);
         }
         if(Object.keys(this.objects).length == 0) {
@@ -132,9 +142,49 @@ class CentroidTracker {
                 })
             }
         }
-
+        this.updateTrackable(this.objects);
         return Object.assign({},this.objects);
     };
+
+
+    updateTrackable(obj) {
+        Object.entries(obj).forEach(([objectID, centroid]) => {
+            let to = this.trackableObjects[objectID];
+            if(to == null || to == undefined) {
+                to = new TrackableObject(objectID, centroid);
+            }
+            else {
+                let x = to.centroids.map(c => {
+                    return c[0]
+                })
+                let y = to.centroids.map(c => {
+                    return c[1]
+                })
+                let x_mean = 0;
+                let y_mean = 0;
+                x.forEach(elem => {
+                    x_mean += elem;
+                })
+                x_mean /= x.length;
+                x_direction = centroid[0] - x_mean;
+                y.forEach(elem => {
+                    y_mean += elem;
+                })
+                y_mean /= y.length;
+                y_direction = centroid[1] - y_mean;
+                to.centroids.push(centroid);
+                if(to.counted === false) {
+                    if(y_direction < 0 && centroid[1] < 500/2) {
+                        console.log("up")
+                    }
+                    else if(y_direction > 0 && centroid[1] > 500/2) {
+                        console.log("down")
+                    }
+                }
+            }
+            this.trackableObjects[objectID] = to;
+        })
+    }
 };
 
 module.exports = CentroidTracker;

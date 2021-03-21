@@ -147,44 +147,44 @@ class CentroidTracker {
     };
 
 
-    updateTrackable(obj) {
-        Object.entries(obj).forEach(([objectID, centroid]) => {
-            let to = this.trackableObjects[objectID];
-            if(to == null || to == undefined) {
-                to = new TrackableObject(objectID, centroid);
-            }
-            else {
-                let x = to.centroids.map(c => {
-                    return c[0]
-                })
-                let y = to.centroids.map(c => {
-                    return c[1]
-                })
-                let x_mean = 0;
-                let y_mean = 0;
-                x.forEach(elem => {
-                    x_mean += elem;
-                })
-                x_mean /= x.length;
-                x_direction = centroid[0] - x_mean;
-                y.forEach(elem => {
-                    y_mean += elem;
-                })
-                y_mean /= y.length;
-                y_direction = centroid[1] - y_mean;
-                to.centroids.push(centroid);
-                if(to.counted === false) {
-                    if(y_direction < 0 && centroid[1] < 500/2) {
-                        console.log("up")
-                    }
-                    else if(y_direction > 0 && centroid[1] > 500/2) {
-                        console.log("down")
-                    }
-                }
-            }
-            this.trackableObjects[objectID] = to;
-        })
-    }
+    // updateTrackable(obj) {
+    //     Object.entries(obj).forEach(([objectID, centroid]) => {
+    //         let to = this.trackableObjects[objectID];
+    //         if(to == null || to == undefined) {
+    //             to = new TrackableObject(objectID, centroid);
+    //         }
+    //         else {
+    //             let x = to.centroids.map(c => {
+    //                 return c[0]
+    //             })
+    //             let y = to.centroids.map(c => {
+    //                 return c[1]
+    //             })
+    //             let x_mean = 0;
+    //             let y_mean = 0;
+    //             x.forEach(elem => {
+    //                 x_mean += elem;
+    //             })
+    //             x_mean /= x.length;
+    //             x_direction = centroid[0] - x_mean;
+    //             y.forEach(elem => {
+    //                 y_mean += elem;
+    //             })
+    //             y_mean /= y.length;
+    //             y_direction = centroid[1] - y_mean;
+    //             to.centroids.push(centroid);
+    //             if(to.counted === false) {
+    //                 if(y_direction < 0 && centroid[1] < 500/2) {
+    //                     console.log("up")
+    //                 }
+    //                 else if(y_direction > 0 && centroid[1] > 500/2) {
+    //                     console.log("down")
+    //                 }
+    //             }
+    //         }
+    //         this.trackableObjects[objectID] = to;
+    //     })
+    // }
 };
 
 module.exports = CentroidTracker;

@@ -1,13 +1,15 @@
 # centroidTracker-js
 
-Translated from Python : 
+Translated from Python :
+```
 https://www.pyimagesearch.com/2018/07/23/simple-object-tracking-with-opencv/
+```
 
 
-
-Installation: 
+Installation:
+```
 npm i https://github.com/benjamin-henry/centroidTracker-js.git
-
+```
 Example :
 ```js
 const CentroidTracker = require('centroid-tracker-js')
